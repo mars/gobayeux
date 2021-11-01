@@ -1,4 +1,4 @@
-module github.com/sigmavirus24/gobayeux
+module github.com/mars/gobayeux
 
 go 1.13
 

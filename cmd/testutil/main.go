@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/sigmavirus24/gobayeux"
+	"github.com/mars/gobayeux"
 	"github.com/sirupsen/logrus"
 )
 

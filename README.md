@@ -1,9 +1,6 @@
 # gobayeux
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/sigmavirus24/gobayeux)](https://pkg.go.dev/github.com/sigmavirus24/gobayeux)
-[![Test](https://github.com/sigmavirus24/gobayeux/workflows/Test/badge.svg)](https://github.com/sigmavirus24/gobayeux/actions?query=workflow:Test)
-[![Build](https://github.com/sigmavirus24/gobayeux/workflows/Build/badge.svg)](https://github.com/sigmavirus24/gobayeux/actions?query=workflow:Build)
-[![Lint](https://github.com/sigmavirus24/gobayeux/workflows/Lint/badge.svg)](https://github.com/sigmavirus24/gobayeux/actions?query=workflow:Lint)
+🍴 Forked from [sigmavirus24/gobayeux](https://github.com/sigmavirus24/gobayeux), because that library is missing a recent version release, and the author's status says "🌴 Taking a break from F/OSS indefinitely".
 
 Bayeux protocol library compatible with [CometD](https://cometd.org/)
 and [Faye](https://faye.jcoglan.com/) servers.
@@ -16,7 +13,7 @@ and [Faye](https://faye.jcoglan.com/) servers.
 ### Installation
 
 ```bash
-go get github.com/sigmavirus24/gobayeux
+go get github.com/mars/gobayeux
 ```
 
 ### Status
