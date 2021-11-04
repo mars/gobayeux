@@ -282,15 +282,19 @@ func (b *BayeuxClient) UseExtension(ext MessageExtender) error {
 }
 
 func (b *BayeuxClient) request(ctx context.Context, ms []Message) (*http.Response, error) {
-	var buf bytes.Buffer
-	if err := json.NewEncoder(&buf).Encode(ms); err != nil {
-		return nil, err
-	}
-
-	for _, ext := range b.exts {
-		for _, m := range ms {
+	// Run outgoing extensions for each message
+	var messagesExt []Message
+	for _, m := range ms {
+		for _, ext := range b.exts {
 			ext.Outgoing(&m)
 		}
+		// Collect each message to preserve the extension processing.
+		messagesExt = append(messagesExt, m)
+	}
+
+	var buf bytes.Buffer
+	if err := json.NewEncoder(&buf).Encode(messagesExt); err != nil {
+		return nil, err
 	}
 
 	req, err := http.NewRequestWithContext(ctx, "POST", b.serverAddress.String(), &buf)
@@ -317,12 +321,17 @@ func (b *BayeuxClient) parseResponse(resp *http.Response) ([]Message, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&messages); err != nil {
 		return nil, err
 	}
-	for _, ext := range b.exts {
-		for _, m := range messages {
+
+	// Run outgoing extensions for each message
+	var messagesExt []Message
+	for _, m := range messages {
+		for _, ext := range b.exts {
 			ext.Incoming(&m)
 		}
+		// Collect each message to preserve the extension processing.
+		messagesExt = append(messagesExt, m)
 	}
-	return messages, nil
+	return messagesExt, nil
 }
 
 type clientState struct {
